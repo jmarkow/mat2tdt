@@ -4,7 +4,7 @@ function mat2tdt_set_tag(OBJ,EVENT,DEV,TAG_NAME)
 %
 %
 
-newval=get(OBJ,'value');
+newval=str2num(get(OBJ,'string'));
 status=DEV.SetTagVal(TAG_NAME,newval);
 
 if status

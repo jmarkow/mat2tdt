@@ -11,6 +11,6 @@ for i=1:num
 	TAG(i).type=char(DEV.GetTagType(TAG(i).name));
 	TAG(i).size=DEV.GetTagSize(TAG(i).name);
 	if TAG(i).size==1
-		TAG(i).init_val=DEV.GatTagVal(TAG(i).name);
-	end
+		TAG(i).init_val=DEV.GetTagVal(TAG(i).name);
+    end
 end

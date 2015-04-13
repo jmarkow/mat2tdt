@@ -35,7 +35,7 @@ for i=1:2:nparams
 		case 'text_width'
 			text_width=varargin{i+1};
 		case 'vert_space'
-			vert_space=varargin{i+1}:
+			vert_space=varargin{i+1};
 		case 'fontsize'
 			fontsize=varargin{i+1};
 
@@ -45,12 +45,13 @@ end
 % gathers tags and provides a simple interface to change them
 
 if isempty(cof)
-	[pathname,filename]=uigetfile('*.rcx','Pick a circuit file to load, must match the currently running circuit');
+	[filename,pathname]=uigetfile('*.rcx','Pick a circuit file to load, must match the currently running circuit');
+    cof=fullfile(pathname,filename);
 end
 
 % connect to the tdt
 
-dev=mat2tdt_connect(hw,interface,num);
+dev=mat2tdt_connect(hw,interface,num,cof);
 
 % get parameter tag names and properties
 
@@ -59,7 +60,7 @@ tags=mat2tdt_collect_tags(dev);
 to_del=[];
 
 for i=1:length(tags)
-	if tags(i).size~=1
+	if tags(i).size~=1 | tags(i).name(1)=='%'
 		to_del=[to_del i];
 	end
 end
@@ -101,7 +102,7 @@ for i=1:ntags
 	pos=get(name_axis(i),'position');
 
 	tag_axis(i)=uicontrol(tdt_figure,'Style','edit',...
-		'String',num2str(tags(i).val),...
+		'String',num2str(tags(i).init_val),...
 		'Units','Normalized',...
 		'FontSize',fontsize,...
 		'Position',[pos(1)+pos(3)+.05 curr_pos-box_height box_width box_height],...
