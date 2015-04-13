@@ -1,8 +1,9 @@
-function mat2tdt_interface()
+function mat2tdt_interface(varargin)
 %
 %
 %
 %
+
 
 % user parameters
 
@@ -13,8 +14,39 @@ box_width=.5;
 text_width=.3;
 vert_space=.025;
 fontsize=13;
+cof='';
+
+nparams=length(varargin);
+
+if mod(nparams,2)>0
+	error('Parameters must be specified as parameter/value pairs');
+end
+
+for i=1:2:nparams
+	switch lower(varargin{i})
+		case 'hw'
+			hw=varargin{i+1};
+		case 'interface'
+			interface=varargin{i+1};
+		case 'num'
+			num=varargin{i+1};
+		case 'box_width'
+		  	box_width=varargin{i+1};
+		case 'text_width'
+			text_width=varargin{i+1};
+		case 'vert_space'
+			vert_space=varargin{i+1}:
+		case 'fontsize'
+			fontsize=varargin{i+1};
+
+	end
+end
 
 % gathers tags and provides a simple interface to change them
+
+if isempty(cof)
+	[pathname,filename]=uigetfile('*.rcx','Pick a circuit file to load, must match the currently running circuit');
+end
 
 % connect to the tdt
 
@@ -80,7 +112,6 @@ for i=1:ntags
 end
 
 set(tdt_figure,'visible','on');
-
 
 % TODO: cleanup functions?
 % TODO: leave room for soft triggers, displays for buffers?
