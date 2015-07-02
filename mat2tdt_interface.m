@@ -114,5 +114,5 @@ end
 
 set(tdt_figure,'visible','on');
 
-% TODO: cleanup functions?
+% TODO: cleanup functions? remove active figure, etc.
 % TODO: leave room for soft triggers, displays for buffers?
