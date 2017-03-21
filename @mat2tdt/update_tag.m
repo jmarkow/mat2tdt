@@ -54,4 +54,4 @@ else
   fprintf('Did not find tag %s\n',TAG)
 end
 
-OBJ.update_tags;
+OBJ.collect_tags;
