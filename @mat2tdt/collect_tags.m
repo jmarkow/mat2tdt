@@ -12,5 +12,7 @@ num=OBJ.activex.dev.GetNumOf('ParTag');
 
 for i=1:num
 	tag_name=OBJ.activex.dev.GetNameOf('ParTag',i);
-	OBJ.tags.(tag_name)=OBJ.activex.dev.GetTagVal(tag_name);
+	if tag_name(1)~='%'
+		OBJ.tags.(tag_name)=OBJ.activex.dev.GetTagVal(tag_name);
+	end
 end
