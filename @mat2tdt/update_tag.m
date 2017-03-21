@@ -17,8 +17,8 @@ SUCCEED=false;
 
 if isfield(OBJ.tags,TAG)
 
-  tag_class=classname(OBJ.tags.(TAG));
-  use_class=classname(VAL);
+  tag_class=class(OBJ.tags.(TAG));
+  use_class=class(VAL);
 
   if isa(VAL,use_class)
     fprintf('Setting tag %s ',TAG)
