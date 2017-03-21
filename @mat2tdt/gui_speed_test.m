@@ -18,12 +18,17 @@ end
 
 button_dialog = figure();
 button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
-                    'String', 'Break', ...
-                    'Callback', {@gui_close_fig,button_dialog});
+                    'String', 'Break', 'Position',[.1 .1 .8 .8],...
+                    'Callback', 'delete(gcbf)');
 
 transfer_pts=OBJ.tags.BufferSize/2;
+fid=fopen('testing.bin','wb');
 
 while (ishandle(button_dialog))
+
+	% ensure the gui updates foolio
+
+	drawnow();
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
@@ -32,6 +37,7 @@ while (ishandle(button_dialog))
 	end
 
 	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts);
+	fwrite(fid,read_data,'float32','ieee-be');
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	if cur_idx<transfer_pts
@@ -54,3 +60,6 @@ end
 % stop the buffer dun
 
 OBJ.activex.dev.SoftTrg(2);
+fclose(fid);
+
+fprintf('Buffer stopped...\n');
