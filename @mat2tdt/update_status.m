@@ -8,7 +8,7 @@ OBJ.status.activex=strcmp(class(OBJ.activex.zbus),'COM.ZBUS_x')&strcmp(class(OBJ
 OBJ.status.circuit_loaded=false;
 OBJ.status.circuit_running=false;
 OBJ.status.dev_connected=false;
-
+OBJ.status.circuit_exists=exist(OBJ.settings.circuit_file,'file')==2;
 % get basic properties if we have a running activex connection
 
 if OBJ.status.activex
