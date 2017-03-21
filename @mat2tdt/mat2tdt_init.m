@@ -1,14 +1,16 @@
-function [rx8,rx8_status,zbus,zbus_status,loadfile_status,fs]=init_tdt(loadfile,sr,reset,flush)
+function init(OBJ,FLUSH,RESET)
 %
 %
 
-if nargin<4 | isempty(flush)
-	flush=1;
+if nargin<3 | isempty(RESET)
+	reset=false;
 end
 
-if nargin<3 | isempty(reset)
-	reset=0;
+if nargin<2 | isempty(FLUSH)
+	flush=true;
 end
+
+
 % flush zbus io, only one rack so need to loop here
 
 zbus=actxcontrol('ZBUS.x',[1 1 1 1]);
@@ -54,7 +56,7 @@ rx8_status=rx8.ConnectRX8('USB',1);
 
 fprintf('RX8 initialization status %g\n',rx8_status);
 
-% open RCO file 
+% open RCO file
 
 if ~isempty(loadfile)
 	fprintf('Loading file %s\n',loadfile);
@@ -63,4 +65,3 @@ end
 fs=rx8.GetSFreq;
 
 fprintf('RX8 sampling frequency %e, user specified sampling frequency %g\n',fs,sr);
-
