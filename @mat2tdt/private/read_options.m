@@ -53,7 +53,7 @@ for ii=1:length(section_headers)
         tmp=regexp(insert_data(2:end-1),',','split');
         OPTIONS.(section_headers{ii}).(readdata{1}{i})=cell(1,length(tmp));
         for j=1:length(tmp)
-          OPTIONS.(section_headers{ii}).(readdata{1}{i}){j}=tmp{j};
+          OPTIONS.(section_headers{ii}).(readdata{1}{i}){j}=cellstr(tmp{j});
         end
         continue;
       end
