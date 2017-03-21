@@ -7,11 +7,12 @@ function gui_cleanup(FIDS,HANDLES)
 fprintf('Cleaning up GUI...\n');
 
 for i=1:length(FIDS)
+	fprintf('Closing %s...',fopen(FIDS(i)));
 	status=fclose(FIDS(i));
 	if status==0
-		fprintf('Closed %s successfully\n',FIDS(i))
+		fprintf('succeeded\n')
 	else
-		fprintf('Warning %s not closed succesfully\n',FIDS(i))
+		fprintf('failed\n')
 	end
 end
 
