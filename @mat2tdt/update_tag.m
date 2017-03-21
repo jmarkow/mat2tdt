@@ -28,14 +28,14 @@ if isfield(OBJ.tags,TAG)
       fprintf('to %s...',VAL);
     end
 
-    oldval=OBJ.actxcontrol.GetTagVal(TAG);
+    oldval=OBJ.activex.dev.GetTagVal(TAG);
     use_class=class(TAG);
 
-    SUCCEED=OBJ.actxcontrol.SetTagVal(TAG,VAL);
+    SUCCEED=OBJ.activex.dev.SetTagVal(TAG,VAL);
 
     % get the tag dun dun dun
 
-    newval=OBJ.actxcontrol.GetTagVal(TAG);
+    newval=OBJ.activex.dev.GetTagVal(TAG);
 
     if newval==VAL & SUCCEED
       fprintf('succeeded\n');
