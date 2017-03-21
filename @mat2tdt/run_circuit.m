@@ -9,3 +9,4 @@ if ~OBJ.status.circuit_loaded
 end
 
 OBJ.activex.dev.Run;
+OBJ.update_status;
