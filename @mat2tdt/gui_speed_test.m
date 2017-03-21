@@ -18,13 +18,14 @@ if status==1
 end
 
 
-button_dialog = figure;
-button_h = uicontrol('Style', 'PushButton', ...
+button_dialog = figure();
+button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'String', 'Break', ...
-                    'Callback', 'delete(gcbf)');
+                    'Callback', {@delete,button_dialog});
 
-transfer_pts=OBJ.tags.buffer_size/2;
-while (ishandle(button_h))
+transfer_pts=OBJ.tags.BufferSize/2;
+
+while (ishandle(button_dialog))
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
@@ -44,7 +45,6 @@ while (ishandle(button_h))
 	end
 
 	read_data=OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts);
-
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx>transfer_pts
