@@ -1,4 +1,4 @@
-function halt(OBJ)
+function halt_circuit(OBJ)
 %
 %
 %

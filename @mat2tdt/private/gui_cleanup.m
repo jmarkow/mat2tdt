@@ -1,4 +1,4 @@
-function gui_cleanup(FIDS,HANDLES)
+function gui_cleanup(OBJ,FIDS,HANDLES)
 % Makes sure all figure handles and files are closed, just IN CASE
 %
 %
@@ -20,4 +20,12 @@ for i=1:length(HANDLES)
 	if ishandle(HANDLES(i))
 		delete(HANDLES(i));
 	end
+end
+
+status=OBJ.activex.dev.SoftTrg(2);
+
+if status==1
+	fprintf('Buffer stopped successfully\n');
+else
+	fprintf('Buffer did NOT stop correctly\n');
 end

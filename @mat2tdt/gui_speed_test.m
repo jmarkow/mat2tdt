@@ -19,7 +19,7 @@ button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
 
 
 fid=fopen('testing.bin','Wb');
-finish_up=onCleanup(@() gui_cleanup(fid,button_dialog));
+finish_up=onCleanup(@() gui_cleanup(OBJ,fid,button_dialog));
 
 status=OBJ.activex.dev.SoftTrg(2);
 status=OBJ.activex.dev.SoftTrg(1);
@@ -36,5 +36,4 @@ recording_loop(OBJ,fid,button_dialog);
 
 OBJ.activex.dev.SoftTrg(2);
 fclose(fid);
-
 fprintf('Buffer stopped...\n');
