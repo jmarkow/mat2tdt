@@ -12,6 +12,7 @@ for i=1:length(FIDS)
 		fprintf('Closed %s successfully\n',fid(i))
 	else
 		fprintf('Warning %s not closed succesfully\n',fid(i))
+	end
 end
 
 for i=1:length(HANDLES)
