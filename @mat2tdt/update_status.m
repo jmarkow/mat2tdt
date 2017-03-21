@@ -4,7 +4,7 @@ function update_status(OBJ)
 %
 
 
-OBJ.status.activex=~isempty(OBJ.activex.zbus) & ~isempty(OBJ.activex.dev);
+OBJ.status.activex=strcmp(class(OBJ.activex.zbus),'COM.ZBUS_x')&strcmp(class(OBJ.activex.dev),'COM.RPco_x');
 OBJ.status.circuit_loaded=false;
 OBJ.status.circuit_running=false;
 OBJ.status.dev_connected=false;

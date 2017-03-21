@@ -26,12 +26,12 @@ if isfield(struct,'settings')
 	end
 end
 
-% re-initialize before setting tags??
+% re-initialize before setting tags?? get tag value to validate class first????
 
 if isfield(struct,'tags')
 	options=fieldnames(struct.tags);
 	for i=1:length(options)
-		OBJ.set_tag(options{i},struct.tags.(options{i}));
+		OBJ.update_tag(options{i},struct.tags.(options{i}));
 	end
 end
 

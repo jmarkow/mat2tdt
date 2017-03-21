@@ -28,6 +28,9 @@ if isfield(OBJ.tags,TAG)
       fprintf('to %s...',VAL);
     end
 
+    oldval=OBJ.actxcontrol.GetTagVal(TAG);
+    use_class=class(TAG);
+
     SUCCEED=OBJ.actxcontrol.SetTagVal(TAG,VAL);
 
     % get the tag dun dun dun
