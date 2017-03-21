@@ -1,5 +1,4 @@
-function recording_loop(FID,HANDLE)
-%
+function recording_loop(OBJ,FID,HANDLE)
 %
 %
 %

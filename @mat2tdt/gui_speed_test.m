@@ -28,7 +28,7 @@ else
 	error('Could not start buffer');
 end
 
-recording_loop(fid,button_dialog);
+recording_loop(OBJ,fid,button_dialog);
 
 % stop the buffer dun
 
