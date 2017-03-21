@@ -12,7 +12,7 @@ if ~OBJ.status.circuit_loaded
   return
 end
 
-OBJ.update_tags;
+OBJ.collect_tags;
 SUCCEED=false;
 
 if isfield(OBJ.tags,TAG)
