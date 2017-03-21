@@ -5,9 +5,9 @@ function update_status(OBJ)
 
 
 OBJ.status.activex=~isempty(OBJ.activex.zbus) & ~isempty(OBJ.activex.dev);
-OBJ.status.circuit_loaded=False;
-OBJ.status.circuit_running=False;
-OBJ.status.dev_connected=False;
+OBJ.status.circuit_loaded=false;
+OBJ.status.circuit_running=false;
+OBJ.status.dev_connected=false;
 
 % get basic properties if we have a running activex connection
 
