@@ -21,5 +21,8 @@ if OBJ.status.activex
 end
 
 if OBJ.status.circuit_loaded
-	OBJ.status.buffer_exists=any(strcmp(fieldnames(OBJ.tags),'BufferData'));
+	OBJ.status.buffer_exists=false;
+	if isstruct(OBJ.tags)
+		OBJ.status.buffer_exists=any(strcmp(fieldnames(OBJ.tags),'BufferData'));
+	end
 end
