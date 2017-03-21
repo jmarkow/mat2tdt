@@ -2,7 +2,6 @@ function gui_speed_test(OBJ)
 %
 %
 %
-%
 
 % assumes our start and stop triggers are soft trigs behavior_model
 
@@ -17,11 +16,10 @@ if status==1
 	fprintf('Buffer recording started\n');
 end
 
-
 button_dialog = figure();
 button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'String', 'Break', ...
-                    'Callback', {@delete,button_dialog});
+                    'Callback', {@gui_close_fig,button_dialog});
 
 transfer_pts=OBJ.tags.BufferSize/2;
 
