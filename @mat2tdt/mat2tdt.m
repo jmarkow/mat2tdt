@@ -4,15 +4,12 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 
 	properties
 
-		device
-		circuit
-		fs
-		activex
 
 	end
 
 	properties (GetAccess=public,SetAccess=private)
 
+		activex
 		tags
 		settings
 		status

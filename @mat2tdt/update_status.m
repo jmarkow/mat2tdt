@@ -19,3 +19,7 @@ if OBJ.status.activex
 	OBJ.status.zbus_connection=OBJ.activex.zbus.ConnectZBUS(OBJ.settings.interface)==1;
 	OBJ.status.sampling_rate=OBJ.activex.dev.GetSFreq;
 end
+
+if OBJ.status.circuit_loaded
+	OBJ.status.buffer_exists=any(strcmp(fieldnames(OBJ.tags),'BufferData'));
+end

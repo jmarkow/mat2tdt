@@ -28,6 +28,13 @@ end
 
 % re-initialize before setting tags?? get tag value to validate class first????
 
+% we can only do this if a circuit is loaded
+
+if ~OBJ.status.circuit_loaded
+	fprintf('Circuit not loaded yet, skipping tags...\n');
+	return;
+end
+
 if isfield(struct,'tags')
 	options=fieldnames(struct.tags);
 	for i=1:length(options)
