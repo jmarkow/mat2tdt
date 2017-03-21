@@ -17,7 +17,9 @@ button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'String', 'Break', 'Position',[.1 .1 .8 .8],...
                     'Callback', 'delete(gcbf)');
 
+
 fid=fopen('testing.bin','Wb');
+finish_up=onCleanup(@() gui_cleanup(fid,button_dialog));
 
 status=OBJ.activex.dev.SoftTrg(2);
 status=OBJ.activex.dev.SoftTrg(1);
