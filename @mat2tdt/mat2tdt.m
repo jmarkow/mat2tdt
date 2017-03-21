@@ -56,6 +56,8 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 
 	methods(Static)
 
+		num=get_device_number(id)
+
 	% doesn't require the kinect_extract object
 
 	end
