@@ -7,7 +7,7 @@ OBJ.settings.zbus_rack_num=ceil((OBJ.settings.zbus_address-1)/2);
 
 switch lower(OBJ.settings.dev)
 case 'rx8'
-	connect_status=OBJ.activex.dev.ConnectRX8(OBJ.settings.dev,1);
+	connect_status=OBJ.activex.dev.ConnectRX8(upper(OBJ.settings.dev),1);
 otherwise
 	fprintf('Device %s currently not supported\n',OBJ.settings.dev);
 end

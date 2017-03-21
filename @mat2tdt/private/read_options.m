@@ -47,7 +47,7 @@ for ii=1:length(section_headers)
       insert_data=regexprep(insert_data,'''','');
       %insert_data=regexprep(insert_data,'''$','');
 
-      OPTIONS.(section_headers{ii}).(readdata{1}{i})=insert_data;
+      OPTIONS.(section_headers{ii}).(readdata{1}{i})=strtrim(insert_data);
 
       if ~isempty(insert_data) & (insert_data(1)=='{' & insert_data(end)=='}')
         tmp=regexp(insert_data(2:end-1),',','split');
