@@ -36,7 +36,7 @@ while (ishandle(button_dialog))
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts);
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts-1);
 	fwrite(fid,read_data,'float32','ieee-be');
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
