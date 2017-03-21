@@ -22,7 +22,7 @@ button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'Callback', 'delete(gcbf)');
 
 transfer_pts=OBJ.tags.BufferSize/2;
-fid=fopen('testing.bin','wb');
+fid=fopen('testing.bin','Wb');
 
 while (ishandle(button_dialog))
 
