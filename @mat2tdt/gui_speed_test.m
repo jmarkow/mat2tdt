@@ -10,52 +10,25 @@ if ~(OBJ.status.buffer_exists&OBJ.status.circuit_running)
 	return;
 end
 
-status=OBJ.activex.dev.SoftTrg(1);
-
-if status==1
-	fprintf('Buffer recording started\n');
-end
+% TODO: on cleanup, a bunch of dialog boxes and a GUI for specifying a filepath
 
 button_dialog = figure();
 button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'String', 'Break', 'Position',[.1 .1 .8 .8],...
                     'Callback', 'delete(gcbf)');
 
-transfer_pts=OBJ.tags.BufferSize/2;
 fid=fopen('testing.bin','Wb');
 
-while (ishandle(button_dialog))
+status=OBJ.activex.dev.SoftTrg(2);
+status=OBJ.activex.dev.SoftTrg(1);
 
-	% ensure the gui updates foolio
-
-	drawnow();
-
-	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-
-	while cur_idx<transfer_pts
-		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-	end
-
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts-1);
-	fwrite(fid,read_data,'float32','ieee-be');
-
-	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-	if cur_idx<transfer_pts
-		fprintf('Current transfer rate too slow to keep up...\n');
-	end
-
-	while cur_idx>transfer_pts
-		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-	end
-
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts);
-	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-
-	if cur_idx>transfer_pts
-		fprintf('Current transfer rate too slow to keep up...\n');
-	end
-
+if status==1
+	fprintf('Buffer recording started\n');
+else
+	error('Could not start buffer');
 end
+
+recording_loop(fid,button_dialog);
 
 % stop the buffer dun
 

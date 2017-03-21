@@ -9,3 +9,4 @@ if ~OBJ.status.circuit_running
 end
 
 OBJ.activex.dev.Halt;
+OBJ.update_status;
