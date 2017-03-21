@@ -7,7 +7,7 @@ if ~(OBJ.status.activex & OBJ.status.dev_connected & OBJ.status.circuit_exists)
 	return;
 end
 
-loadfile_status=OBJ.activex.dev.LoadCOFsf(OBJ.settings.circuit_file,OBJ.settings.circuit_fs);
+loadfile_status=OBJ.activex.dev.LoadCOFsf(OBJ.settings.circuit_file,OBJ.settings.fs);
 
 if loadfile_status==0
 	error('Error loading circuit %s',OBJ.settings.circuit_file);
