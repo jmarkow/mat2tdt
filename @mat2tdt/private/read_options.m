@@ -47,13 +47,13 @@ for ii=1:length(section_headers)
       insert_data=regexprep(insert_data,'''','');
       %insert_data=regexprep(insert_data,'''$','');
 
-      OPTIONS.(section_headers{ii}).(readdata{1}{i})=insert_data;
+      OPTIONS.(section_headers{ii}).(readdata{1}{i})=cellstr(insert_data);
 
       if ~isempty(insert_data) & (insert_data(1)=='{' & insert_data(end)=='}')
         tmp=regexp(insert_data(2:end-1),',','split');
         OPTIONS.(section_headers{ii}).(readdata{1}{i})=cell(1,length(tmp));
         for j=1:length(tmp)
-          OPTIONS.(section_headers{ii}).(readdata{1}{i}){j}=cellstr(tmp{j});
+          OPTIONS.(section_headers{ii}).(readdata{1}{i}){j}=tmp{j};
         end
         continue;
       end
