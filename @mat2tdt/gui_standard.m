@@ -22,7 +22,7 @@ ntags=length(tag_names);
 fontsize=10;
 top_pos=.95;
 bottom_pos=.4;
-ncols=ceil(ntags/OBJ.settings.gui_rows_per_column)
+ncols=ceil(ntags/OBJ.settings.gui_rows_per_column);
 
 column_width=(OBJ.settings.gui_width-50)/ncols;
 
