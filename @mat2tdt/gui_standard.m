@@ -9,6 +9,9 @@ if ~OBJ.status.circuit_loaded
 	return;
 end
 
+OBJ.update_status;
+OBJ.collect_tags;
+
 tag_names=fieldnames(OBJ.tags);
 ntags=length(tag_names);
 
