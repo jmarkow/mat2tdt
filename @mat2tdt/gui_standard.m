@@ -118,8 +118,32 @@ for i=1:length(status_bar)
 
 end
 
+% alright add an effin' record buffer button bar
+
+button_axis.buffer_filename=uicontrol(tdt_figure,'Style','Text',...
+	'String',OBJ.buffer_store,
+	'Units','Normalized',...
+	'Position',[.61 rem_top-.01-.2 .2 .075]);
+
+button_axis.get_new_file=uicontrol(tdt_figure,'Style','Pushbutton',...
+	'String','Autofile',
+	'Units','Normalized',...
+	'Position',[.61 rem_top-.01 .2 .075],...
+	'Callback',{@set_buffer_store_gui,button_axis.buffer_filename});
+
+button_axis.get_new_file_dialog=uicontrol(tdt_figure,'Style','Pushbutton',...
+	'String','...',
+	'Units','Normalized',...
+	'Position',[.61 rem_top-.01-.1 .2 .075]);
+
+button_axis.record_buffer=uicontrol(tdt_figure,'Style','Pushbutton',...
+	'String','Record buffer',
+	'Units','Normalized',...
+	'Position',[.61 rem_top-.4 .075]);
+
 OBJ.gui_handles.status=status_axis;
 OBJ.gui_handles.button=button_axis;
+OBJ.update_status;
 
 % refresh FILE, and record MOFO
 

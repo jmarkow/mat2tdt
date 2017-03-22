@@ -58,6 +58,8 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 				obj.set_options_from_file(OPTIONS);
 			end
 
+			obj.set_buffer_store;
+
 		end
 
 		% setting any of these options triggers a status update
