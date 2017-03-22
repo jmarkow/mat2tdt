@@ -14,12 +14,14 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 		settings
 		status
 		buffer_store
-		
+
 	end
 
 	% the completely hidden stuff
 
 	properties (Access=private)
+
+		gui_handles
 
 	end
 

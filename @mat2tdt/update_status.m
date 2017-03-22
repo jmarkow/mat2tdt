@@ -26,3 +26,50 @@ if OBJ.status.circuit_loaded
 		OBJ.status.buffer_exists=any(strcmp(fieldnames(OBJ.tags),'BufferData'));
 	end
 end
+
+% if a gui exists, you know, do stuff
+
+if isfield(OBJ,'gui_handles')
+
+	chk_status={'circuit_loaded','circuit_running','dev_connected','zbus_connected'};
+
+	% status updates
+
+	if isfield(OBJ.gui_handles,'status')
+		for i=1:length(chk_status)
+
+			if isfield(OBJ.gui_handles.status.(chk_status{i}) & ...
+					ishandle(OBJ.gui_handles.status.(chk_status{i}))
+				if OBJ.status.(chk_status{i})
+					set(OBJ.gui_handles.(chk_status{i}),'string','Yes','Color','g');
+				else
+					set(OBJ.gui_handles.(chk_status{i}),'string','No','Color','r');
+				end
+			end
+
+		end
+
+		if isfield(OBJ.gui_handles.status.sampling_rate & ...
+				ishandle(OBJ.gui_handles.status.sampling_rate)
+			set(OBJ.gui_handles.status.sampling_rate,'string',OBJ.status.sampling_rate);
+		end
+
+		% enable or disable the record button if it exists
+
+		if isfield(OBJ.gui_handles.button.record_buffer) & ...
+			ishandle(OBJ.gui_handles.button.record_buffer)
+
+			if OBJ.status.circuit_running
+				set(OBJ.gui_handles.button.record_buffer,'enabled','on');
+			else
+				set(OBJ.gui_handles.button.record_buffer,'enabled','off');
+			end
+
+		end
+
+
+	end
+
+
+
+end
