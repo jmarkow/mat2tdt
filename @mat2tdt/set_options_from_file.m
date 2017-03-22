@@ -26,6 +26,8 @@ if isfield(struct,'settings')
 	end
 end
 
+OBJ.update_status;
+
 % re-initialize before setting tags?? get tag value to validate class first????
 % we can only do this if a circuit is loaded
 
