@@ -58,7 +58,7 @@ if isfield(OBJ.gui_handles,'status')
 	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
 		ishandle(OBJ.gui_handles.button.record_buffer)
 
-		if OBJ.status.circuit_running
+		if OBJ.status.circuit_running & exist(OBJ.buffer_file,'file')~=2
 			set(OBJ.gui_handles.button.record_buffer,'enabled','on');
 		else
 			set(OBJ.gui_handles.button.record_buffer,'enabled','off');
