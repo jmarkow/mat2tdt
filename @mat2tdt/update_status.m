@@ -57,12 +57,18 @@ if isfield(OBJ.gui_handles,'status')
 		set(OBJ.gui_handles.status.sampling_rate,'string',OBJ.status.sampling_rate);
 	end
 
+	if isfield(OBJ.gui_handles.button,'buffer_filename') & ...
+			ishandle(OBJ.gui_handles.button,'buffer_filename')
+		set(OBJ.gui_handles.button.buffer_filename,'string',OBJ.status.sampling_rate);
+	end
+
+
 	% enable or disable the record button if it exists
 
 	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
 		ishandle(OBJ.gui_handles.button.record_buffer)
 
-		if OBJ.status.circuit_running & exist(OBJ.buffer_store,'file')~=2
+		if OBJ.status.circuit_running & exist(OBJ.buffer_store,'file')==0
 			set(OBJ.gui_handles.button.record_buffer,'enable','on');
 		else
 			set(OBJ.gui_handles.button.record_buffer,'enable','off');
