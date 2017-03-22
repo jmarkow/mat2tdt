@@ -49,7 +49,7 @@ for i=1:ntags
 	% callback is to reset the tag if we edit the text
 
 	cur_column=floor((i-1)/OBJ.settings.gui_rows_per_column);
-    cur_row=rem(i-1,OBJ.settings.gui_rows_per_column)+1
+  cur_row=rem(i-1,OBJ.settings.gui_rows_per_column)+1;
 
 	left_edge=cur_column*column_width+column_margin*min(cur_column,1);
 
@@ -71,6 +71,7 @@ for i=1:ntags
 
 end
 
+OBJ.gui_handles.tags=tag_axis;
 rem_top=bottom_pos-.175;
 
 button_axis.update_tags=uicontrol(tdt_figure,'Style','PushButton',...
@@ -78,7 +79,7 @@ button_axis.update_tags=uicontrol(tdt_figure,'Style','PushButton',...
 	'Units','Normalized',...
 	'FontSize',fontsize,...
 	'Position',[.05 rem_top .2 .075],...
-	'Call',{@push_tags,tag_axis});
+	'Call',{@push_tags_gui,OBJ,tag_axis});
 
 button_axis.run_circuit=uicontrol(tdt_figure,'Style','PushButton',...
 	'String','Run',...
@@ -148,7 +149,7 @@ if OBJ.status.buffer_exists
 
 	OBJ.gui_handles.button=button_axis;
 	OBJ.gui_handles.status=status_axis;
-	
+
 	button_axis.record_buffer=uicontrol(tdt_figure,'Style','Pushbutton',...
 		'String','Start buffer',...
 		'Units','Normalized',...

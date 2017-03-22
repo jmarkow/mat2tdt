@@ -52,6 +52,15 @@ if isfield(OBJ.gui_handles,'status')
 
 	end
 
+	tag_names=fieldnames(OBJ.tags);
+
+	for i=1:length(tag_names)
+		if isfield(OBJ.gui_handles,tag_names{i}) & ...
+			ishandle(OBJ.gui_handles.tag_names{i})
+			set(OBJ.gui_handles.tag_names{i},'String',OBJ.tags.(tag_names{i}));
+		end
+	end
+
 	if isfield(OBJ.gui_handles.status,'sampling_rate') & ...
 			ishandle(OBJ.gui_handles.status.sampling_rate)
 		set(OBJ.gui_handles.status.sampling_rate,'string',OBJ.status.sampling_rate);
@@ -61,8 +70,6 @@ if isfield(OBJ.gui_handles,'status')
 			ishandle(OBJ.gui_handles.button.buffer_filename)
 		set(OBJ.gui_handles.button.buffer_filename,'string',OBJ.buffer_store);
 	end
-
-
 
 	% enable or disable the record button if it exists
 
