@@ -2,6 +2,10 @@ function load_circuit(OBJ)
 %
 %
 
+if OBJ.status.activex & OBJ.status.circuit_exists & ~OBJ.status.dev_connected
+	OBJ.connect_device;
+end
+
 if ~(OBJ.status.activex & OBJ.status.dev_connected & OBJ.status.circuit_exists)
 	fprintf('Need activex connection, connected device, and valid COF\n');
 	return;

@@ -32,11 +32,18 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			if nargin<1
 				OPTIONS=[];
 			end
+
 			% read the defaults, try to make something of it
 
 			obj.settings.zbus_rack_num=[];
 			obj.settings.zbus_address=[];
 			obj.use_defaults;
+
+			config_files=dir(fullfile(pwd,'*.config'));
+
+			if isempty(OPTIONS) & length(config_files)>0
+				OPTIONS=fullfile(pwd,config_files(1).name);
+			end
 
 			if ~isempty(OPTIONS)
 				obj.set_options_from_file(OPTIONS);

@@ -16,7 +16,7 @@ if OBJ.status.activex
 	OBJ.status.dev_connected=bitget(dev_status,1);
 	OBJ.status.circuit_loaded=bitget(dev_status,2);
 	OBJ.status.circuit_running=bitget(dev_status,3);
-	OBJ.status.zbus_connection=OBJ.activex.zbus.ConnectZBUS(OBJ.settings.interface)==1;
+	OBJ.status.zbus_connected=OBJ.activex.zbus.ConnectZBUS(OBJ.settings.interface)==1;
 	OBJ.status.sampling_rate=OBJ.activex.dev.GetSFreq;
 end
 

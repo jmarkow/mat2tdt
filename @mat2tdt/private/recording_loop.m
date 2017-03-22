@@ -11,7 +11,6 @@ while (ishandle(HANDLE))
 
 	drawnow();
 
-
 	% wait until the first half of the buffer fills
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');

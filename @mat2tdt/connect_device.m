@@ -2,6 +2,11 @@ function connect_device(OBJ)
 %
 %
 
+if OBJ.status.zbus_connected
+	fprintf('Not connected to zbus...\n');
+	return;
+end
+
 OBJ.settings.zbus_address=OBJ.activex.zbus.GetDeviceAddr(OBJ.get_device_number(OBJ.settings.dev),1);
 OBJ.settings.zbus_rack_num=ceil((OBJ.settings.zbus_address-1)/2);
 

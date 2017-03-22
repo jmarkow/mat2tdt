@@ -27,15 +27,21 @@ if isfield(struct,'settings')
 end
 
 % re-initialize before setting tags?? get tag value to validate class first????
-
 % we can only do this if a circuit is loaded
 
-if ~OBJ.status.circuit_loaded
-	fprintf('Circuit not loaded yet, skipping tags...\n');
-	return;
-end
-
 if isfield(struct,'tags')
+
+	if ~OBJ.status.circuit_loaded
+		fprintf('Loading circuit...');
+		OBJ.load_circuit;
+		if OBJ.status.circuit_loaded
+			fprintf('successfully\n');
+		else
+			fprintf('failed\n');
+			return;
+		end
+	end
+
 	options=fieldnames(struct.tags);
 	for i=1:length(options)
 		OBJ.update_tag(options{i},struct.tags.(options{i}));
