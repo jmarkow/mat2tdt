@@ -34,12 +34,9 @@ OBJ.update_status;
 if isfield(struct,'tags')
 
 	if ~OBJ.status.circuit_loaded
-		fprintf('Loading circuit...');
 		OBJ.load_circuit;
-		if OBJ.status.circuit_loaded
-			fprintf('successfully\n');
-		else
-			fprintf('failed\n');
+		if ~OBJ.status.circuit_loaded
+			fprintf('Could not load circuit\n');
 			return;
 		end
 	end
