@@ -40,7 +40,7 @@ if isfield(OBJ.tags,TAG)
     if newval==VAL & SUCCEED
       fprintf('succeeded\n');
     else
-      if isnumeric
+      if isnumeric(newval)
         fprintf('failed, new value %g\n',newval)
       else
         fprintf('failed, new value %s\n',newval);
