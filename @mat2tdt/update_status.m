@@ -59,9 +59,9 @@ if isfield(OBJ.gui_handles,'status')
 		ishandle(OBJ.gui_handles.button.record_buffer)
 
 		if OBJ.status.circuit_running
-			set(OBJ.gui_handles.button.record_buffer,'enabled','on');
+			set(OBJ.gui_handles.button.record_buffer,'enable','on');
 		else
-			set(OBJ.gui_handles.button.record_buffer,'enabled','off');
+			set(OBJ.gui_handles.button.record_buffer,'enable','off');
 		end
 
 	end
