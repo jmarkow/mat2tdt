@@ -14,7 +14,7 @@ end
 
 button_dialog = figure();
 button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
-                    'String', 'Break', 'Position',[.1 .1 .8 .8],...
+                    'String', 'Break', 'Position',[50 50 200 200],...
                     'Units','Normalized','Callback', 'delete(gcbf)');
 
 
@@ -34,6 +34,6 @@ recording_loop(OBJ,fid,button_dialog);
 
 % stop the buffer dun
 
-OBJ.activex.dev.SoftTrg(2);
-fclose(fid);
-fprintf('Buffer stopped...\n');
+% OBJ.activex.dev.SoftTrg(2);
+% fclose(fid);
+% fprintf('Buffer stopped...\n');
