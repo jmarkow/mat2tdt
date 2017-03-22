@@ -13,7 +13,7 @@ if isfield(struct,'settings')
 	options=fieldnames(struct.settings);
 	for i=1:length(options)
 		if isfield(OBJ.settings,options{i})
-			use_class=classname(OBJ.settings.(options{i}));
+			use_class=class(OBJ.settings.(options{i}));
 			if isa(struct.settings.(options{i}),use_class)
 				OBJ.settings.(options{i})=struct.settings.(options{i});
 			else
