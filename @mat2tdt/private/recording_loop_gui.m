@@ -2,7 +2,10 @@ function recording_loop_gui(SRC,EVENT,OBJ)
 %
 %
 
-set(SRC,'enabled','off')
+set(SRC,'enable','off')
+
+OBJ.status.recording_enabled=true;
+OBJ.update_status;
 
 [fid,status]=fopen(OBJ.buffer_store,'Wb');
 
@@ -30,9 +33,10 @@ status=OBJ.activex.dev.SoftTrg(2);
 fclose(fid);
 
 OBJ.status.recording_enabled=false;
+OBJ.update_status;
 
 if status==1
 	fprintf('Buffer stopped...\n')
 end
 
-set(SRC,'enabled','on')
+set(SRC,'enable','on')
