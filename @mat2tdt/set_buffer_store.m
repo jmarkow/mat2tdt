@@ -29,3 +29,5 @@ end
 if isstruct(values) & values.UserWrite==1
 	OBJ.buffer_store=use_file;
 end
+
+OBJ.update_status;
