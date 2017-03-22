@@ -6,6 +6,14 @@ OBJ.status.recording_enabled=true;
 set(OBJ.gui_handles.button.stop_button,'enable','on');
 OBJ.update_status;
 
+% save everything to json foolio
+
+[filename,pathname,ext]=fileparts(OBJ.buffer_store);
+
+fprintf('Saving metadata...');
+savejson('',OBJ.tags,fullfile(filename,[ pathname '.json']));
+fprintf('success\n');
+
 [fid,status]=fopen(OBJ.buffer_store,'Wb');
 
 if isempty(status)
