@@ -58,7 +58,7 @@ if isfield(OBJ.gui_handles,'status')
 	end
 
 	if isfield(OBJ.gui_handles.button,'buffer_filename') & ...
-			ishandle(OBJ.gui_handles.button,'buffer_filename')
+			ishandle(OBJ.gui_handles.button.buffer_filename)
 		set(OBJ.gui_handles.button.buffer_filename,'string',OBJ.status.sampling_rate);
 	end
 
