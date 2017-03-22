@@ -1,4 +1,4 @@
-function stop_recording(OBJ)
+function stop_recording(SRC,EVENT,OBJ)
 % yeah that's it boi
 %
 %

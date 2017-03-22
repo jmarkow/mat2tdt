@@ -8,7 +8,6 @@ OBJ.status.activex=strcmp(class(OBJ.activex.zbus),'COM.ZBUS_x')&strcmp(class(OBJ
 OBJ.status.circuit_loaded=false;
 OBJ.status.circuit_running=false;
 OBJ.status.dev_connected=false;
-OBJ.status.recording_enabled=false;
 OBJ.status.circuit_exists=exist(OBJ.settings.circuit_file,'file')==2;
 % get basic properties if we have a running activex connection
 
@@ -21,6 +20,10 @@ if OBJ.status.activex
 	OBJ.status.sampling_rate=OBJ.activex.dev.GetSFreq;
 end
 
+if ~isfield(OBJ.status,'recording_enabled')
+    OBJ.status.recording_enabled=false;
+end
+
 if OBJ.status.circuit_loaded
 	OBJ.status.buffer_exists=false;
 	if isstruct(OBJ.tags)
@@ -31,7 +34,7 @@ end
 % if a gui exists, you know, do stuff
 
 
-chk_status={'circuit_loaded','circuit_running','dev_connected','zbus_connected'};
+chk_status={'circuit_loaded','circuit_running','dev_connected','zbus_connected','recording_enabled'};
 
 % status updates
 
@@ -59,8 +62,8 @@ if isfield(OBJ.gui_handles,'status')
 	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
 		ishandle(OBJ.gui_handles.button.record_buffer)
 
-		if OBJ.status.circuit_running & exist(OBJ.buffer_file,'file')~=2
-			set(OBJ.gui_handles.button.record_buffer,'enabled','on');
+		if OBJ.status.circuit_running & exist(OBJ.buffer_store,'file')~=2
+			set(OBJ.gui_handles.button.record_buffer,'enable','on');
 		else
 			set(OBJ.gui_handles.button.record_buffer,'enable','off');
 		end
