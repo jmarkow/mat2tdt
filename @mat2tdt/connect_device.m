@@ -2,7 +2,7 @@ function connect_device(OBJ)
 %
 %
 
-if OBJ.status.zbus_connected
+if ~OBJ.status.zbus_connected
 	fprintf('Not connected to zbus...\n');
 	return;
 end
