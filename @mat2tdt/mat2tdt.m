@@ -42,8 +42,8 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			obj.activex.dev=[];
 
 			obj.use_defaults;
-			obj.connect_activex;
 			obj.update_status;
+			obj.connect_activex;
 
 			config_files=dir(fullfile(pwd,'*.config'));
 
