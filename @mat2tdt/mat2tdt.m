@@ -13,7 +13,8 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 		tags
 		settings
 		status
-
+		buffer_store
+		
 	end
 
 	% the completely hidden stuff
