@@ -5,7 +5,7 @@ function recording_loop(OBJ,FID,HANDLE)
 
 transfer_pts=OBJ.tags.BufferSize/2;
 
-while (ishandle(HANDLE))
+while (ishandle(HANDLE)) & OBJ.status.recording_enabled
 
 	% ensure the gui updates foolio
 

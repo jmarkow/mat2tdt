@@ -4,6 +4,8 @@ function gui_cleanup(OBJ,FIDS,HANDLES)
 %
 %
 
+OBJ.status.recording_enabled=false;
+
 fprintf('Cleaning up GUI...\n');
 
 for i=1:length(FIDS)

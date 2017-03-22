@@ -8,6 +8,7 @@ OBJ.status.activex=strcmp(class(OBJ.activex.zbus),'COM.ZBUS_x')&strcmp(class(OBJ
 OBJ.status.circuit_loaded=false;
 OBJ.status.circuit_running=false;
 OBJ.status.dev_connected=false;
+OBJ.status.recording_enabled=false;
 OBJ.status.circuit_exists=exist(OBJ.settings.circuit_file,'file')==2;
 % get basic properties if we have a running activex connection
 
@@ -57,7 +58,6 @@ if isfield(OBJ.gui_handles,'status')
 
 	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
 		ishandle(OBJ.gui_handles.button.record_buffer)
-
 
 		if OBJ.status.circuit_running & exist(OBJ.buffer_file,'file')~=2
 			set(OBJ.gui_handles.button.record_buffer,'enabled','on');
