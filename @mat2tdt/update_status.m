@@ -63,6 +63,7 @@ if isfield(OBJ.gui_handles,'status')
 	end
 
 
+
 	% enable or disable the record button if it exists
 
 	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
@@ -74,5 +75,21 @@ if isfield(OBJ.gui_handles,'status')
 			set(OBJ.gui_handles.button.record_buffer,'enable','off');
 		end
 
+		if OBJ.status.recording_enabled
+			set(OBJ.gui_handles.button.record_buffer,'enable','off');
+		end
+
 	end
+
+	if isfield(OBJ.gui_handles.button,'stop_buffer') & ...
+		ishandle(OBJ.gui_handles.button.stop_buffer)
+
+		if OBJ.status.recording_enabled
+			set(OBJ.gui_handles.button.stop_buffer,'enable','on');
+		else
+			set(OBJ.gui_handles.button.stop_buffer,'enable','off');
+		end
+
+	end
+
 end
