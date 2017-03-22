@@ -40,9 +40,9 @@ if isfield(OBJ.gui_handles,'status')
 		if isfield(OBJ.gui_handles.status,chk_status{i}) & ...
 				ishandle(OBJ.gui_handles.status.(chk_status{i}))
 			if OBJ.status.(chk_status{i})
-				set(OBJ.gui_handles.status.(chk_status{i}),'string','Yes','Color','g');
+				set(OBJ.gui_handles.status.(chk_status{i}),'string','Yes','ForegroundColor','g');
 			else
-				set(OBJ.gui_handles.status.(chk_status{i}),'string','No','Color','r');
+				set(OBJ.gui_handles.status.(chk_status{i}),'string','No','ForegroundColor','r');
 			end
 		end
 
