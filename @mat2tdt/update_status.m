@@ -37,7 +37,7 @@ chk_status={'circuit_loaded','circuit_running','dev_connected','zbus_connected'}
 if isfield(OBJ.gui_handles,'status')
 	for i=1:length(chk_status)
 
-		if isfield(OBJ.gui_handles.status.(chk_status{i}) & ...
+		if isfield(OBJ.gui_handles.status,chk_status{i}) & ...
 				ishandle(OBJ.gui_handles.status.(chk_status{i}))
 			if OBJ.status.(chk_status{i})
 				set(OBJ.gui_handles.(chk_status{i}),'string','Yes','Color','g');
@@ -48,14 +48,14 @@ if isfield(OBJ.gui_handles,'status')
 
 	end
 
-	if isfield(OBJ.gui_handles.status.sampling_rate & ...
+	if isfield(OBJ.gui_handles.status,'sampling_rate') & ...
 			ishandle(OBJ.gui_handles.status.sampling_rate)
 		set(OBJ.gui_handles.status.sampling_rate,'string',OBJ.status.sampling_rate);
 	end
 
 	% enable or disable the record button if it exists
 
-	if isfield(OBJ.gui_handles.button.record_buffer) & ...
+	if isfield(OBJ.gui_handles.button,'record_buffer') & ...
 		ishandle(OBJ.gui_handles.button.record_buffer)
 
 		if OBJ.status.circuit_running
