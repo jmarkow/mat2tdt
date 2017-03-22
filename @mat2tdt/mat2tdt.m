@@ -37,9 +37,13 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 
 			obj.settings.zbus_rack_num=[];
 			obj.settings.zbus_address=[];
+
+			obj.activex.zbus=[];
+			obj.activex.dev=[];
+
 			obj.use_defaults;
 			obj.update_status;
-			
+
 			config_files=dir(fullfile(pwd,'*.config'));
 
 			if isempty(OPTIONS) & length(config_files)>0
