@@ -15,7 +15,7 @@ end
 button_dialog = figure();
 button_h = uicontrol(button_dialog,'Style', 'PushButton', ...
                     'String', 'Break', 'Position',[.1 .1 .8 .8],...
-                    'Callback', 'delete(gcbf)');
+                    'Units','Normalized','Callback', 'delete(gcbf)');
 
 
 fid=fopen('testing.bin','Wb');
