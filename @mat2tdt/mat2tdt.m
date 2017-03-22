@@ -42,6 +42,7 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			obj.activex.dev=[];
 
 			obj.use_defaults;
+			obj.connect_activex;
 			obj.update_status;
 
 			config_files=dir(fullfile(pwd,'*.config'));
@@ -53,9 +54,6 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			if ~isempty(OPTIONS)
 				obj.set_options_from_file(OPTIONS);
 			end
-
-			obj.connect_activex;
-
 
 		end
 

@@ -2,7 +2,11 @@ function load_circuit(OBJ)
 %
 %
 
-if OBJ.status.activex & OBJ.status.circuit_exists & ~OBJ.status.dev_connected
+if ~OBJ.status.activex
+	OBJ.connect_activex;
+end
+
+if OBJ.status.activex & ~OBJ.status.dev_connected
 	OBJ.connect_device;
 end
 
