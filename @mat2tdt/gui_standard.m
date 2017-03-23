@@ -53,7 +53,7 @@ name_axis=struct();
 
 tag_width=(1-metadata_width)-hor_margin*2;
 column_width=(1-panel_hor_margin*2)/ncols;
-cur_pos=top_pos;
+cur_pos=tag_top_pos;
 
 column_width=(1-panel_hor_margin*2)/ncols;
 text_width=column_width*.5;
@@ -96,13 +96,13 @@ for i=1:ntags
 end
 
 OBJ.gui_handles.tags=tag_axis;
-rem_top=bottom_pos-(status_bar_height+vert_margin);
+rem_top=tag_bottom_pos-(status_bar_height+vert_margin);
 button_height=(1-panel_vert_margin*2)/3;
 button_width=(1-panel_hor_margin*2);
 
 panel_control=uipanel(tdt_figure,'Title','Device control',...
       'Units','Normalized',...
-      'Position',[ hor_margin vert_margin+status_bar_height .3 bottom_pos-(vert_margin+status_bar_height) ],...
+      'Position',[ hor_margin vert_margin+status_bar_height .3 tag_bottom_pos-(vert_margin+status_bar_height) ],...
       'BackgroundColor',panel_background,...
       'ForegroundColor',font_color,'FontSize',fontsize);
 
