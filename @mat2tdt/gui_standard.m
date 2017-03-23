@@ -23,9 +23,20 @@ font_color=[1 1 1];
 figure_background=[0 0 0];
 
 fontsize=10;
-top_pos=.975;
-bottom_pos=.45;
 status_bar_height=.1;
+column_margin=.01;
+hor_margin=.025;
+vert_margin=.01;
+panel_vert_margin=.01;
+panel_hor_margin=.05;
+tag_top_pos=1-vert_margin;
+tag_bottom_pos=.45;
+
+if OBJ.status.buffer_exists
+    metadata_width=.3;
+else
+    metadata_width=0;
+end
 
 ncols=ceil(ntags/OBJ.settings.gui_rows_per_column);
 column_width=(OBJ.settings.gui_width-50)/ncols;
@@ -39,34 +50,22 @@ tdt_figure=figure('Visible','off','Name',['TDT interface v.001a'],...
 tag_axis=struct();
 name_axis=struct();
 
-column_margin=.01;
-left_margin=.025;
-bottom_margin=.01;
-panel_margin=.01;
 
-if OBJ.status.buffer_exists
-    metadata_width=.3;
-else
-    metadata_width=0;
-end
-tag_width=(1-metadata_width)-left_margin*2;
-column_width=(1-panel_margin)/ncols;
+tag_width=(1-metadata_width)-hor_margin*2;
+column_width=(1-panel_hor_margin*2)/ncols;
 cur_pos=top_pos;
 
-column_width=.95/ncols;
+column_width=(1-panel_hor_margin*2)/ncols;
 text_width=column_width*.5;
 edit_width=column_width-text_width;
-box_height=.95/OBJ.settings.gui_rows_per_column;
+box_height=(1-panel_vert_margin*2)/OBJ.settings.gui_rows_per_column;
 
 panel_tag=uipanel(tdt_figure,'Title','Tags',...
       'Units','Normalized',...
-      'Position',[ left_margin bottom_pos tag_width top_pos-bottom_pos],...
+      'Position',[ hor_margin tag_bottom_pos tag_width tag_top_pos-tag_bottom_pos],...
       'BackgroundColor',panel_background,...
       'ForegroundColor',font_color,'FontSize',fontsize);
 
-panel_vert_margin=.01;
-panel_hor_margin=.05;
-  
 for i=1:ntags
 
 	% start at top
@@ -97,13 +96,13 @@ for i=1:ntags
 end
 
 OBJ.gui_handles.tags=tag_axis;
-rem_top=bottom_pos-.175;
+rem_top=bottom_pos-(status_bar_height+vert_margin);
 button_height=(1-panel_vert_margin*2)/3;
 button_width=(1-panel_hor_margin*2);
 
 panel_control=uipanel(tdt_figure,'Title','Device control',...
       'Units','Normalized',...
-      'Position',[ left_margin bottom_margin+status_bar_height .3 bottom_pos-(bottom_margin+status_bar_height) ],...
+      'Position',[ hor_margin vert_margin+status_bar_height .3 bottom_pos-(vert_margin+status_bar_height) ],...
       'BackgroundColor',panel_background,...
       'ForegroundColor',font_color,'FontSize',fontsize);
 
@@ -131,7 +130,7 @@ button_axis.halt_circuit=uicontrol(panel_control,'Style','PushButton',...
 
 panel_status=uipanel(tdt_figure,'Title','Device status',...
       'Units','Normalized',...
-      'Position',[ left_margin bottom_margin .95 status_bar_height ],...
+      'Position',[ hor_margin vert_margin .95 status_bar_height ],...
       'BackgroundColor',panel_background,...
       'ForegroundColor',font_color,'FontSize',fontsize);
 
@@ -147,7 +146,7 @@ for i=1:length(status_bar)
 	status_id=sprintf('%s_text',status_bar{i});
 	status_text=sprintf('%s: ',regexprep(status_bar{i},'_',' '));
 	status_text(1)=upper(status_text(1));
-    
+
 	status_axis.(status_id)=uicontrol(panel_status,'Style','text',...
 			'String',status_text,...
 			'Units','Normalized',...
@@ -171,29 +170,29 @@ end
 % alright add an effin' record buffer button bar
 
 
-
 if OBJ.status.buffer_exists
 
-    metadata_fields={'session_name','subject_name','notes'};
-    
-    file_height=1/4;
-    button_height=1-file_height;
-    
-    pos=get(panel_control,'position');
-    
-    panel_buffer=uipanel(tdt_figure,'Title','Buffer control',...
-          'Units','Normalized',...
-          'Position',[ pos(1)+pos(3)+left_margin pos(2) (1-left_margin*2-(pos(1)+pos(3))) pos(4) ],...
-          'BackgroundColor',panel_background,...
-          'ForegroundColor',font_color,...
-          'FontSize',fontsize);
-    
+	metadata_fields=fieldnames(OBJ.metadata);
+	metadata_fields={'session_name','subject_name','notes'};
+
+	file_height=1/4;
+	button_height=1-file_height;
+
+	pos=get(panel_control,'position');
+
+	panel_buffer=uipanel(tdt_figure,'Title','Buffer control',...
+		'Units','Normalized',...
+		'Position',[ pos(1)+pos(3)+hor_margin pos(2) (1-hor_margin*2-(pos(1)+pos(3))) pos(4) ],...
+		'BackgroundColor',panel_background,...
+		'ForegroundColor',font_color,...
+		'FontSize',fontsize);
+
 	button_axis.buffer_filename=uicontrol(panel_buffer,'Style','Text',...
 		'String',OBJ.buffer_store,...
 		'Units','Normalized',...
-        'BackgroundColor',panel_background,...
-        'ForegroundColor',font_color,...
-        'FontSize',fontsize,...
+		'BackgroundColor',panel_background,...
+		'ForegroundColor',font_color,...
+		'FontSize',fontsize,...
 		'Position',[panel_hor_margin+.11 (1-panel_vert_margin-file_height) (1-panel_hor_margin*2) file_height/1.5 ]);
 
 	button_axis.get_new_file=uicontrol(panel_buffer,'Style','Pushbutton',...
@@ -215,59 +214,60 @@ if OBJ.status.buffer_exists
 		'Position',[panel_hor_margin+.25 (1-panel_vert_margin-file_height/1.5-button_height) .2 button_height/2 ],...
 		'Callback',{@stop_recording_gui,OBJ},'enable','off');
 
-    pos=get(panel_tag,'position');
-    
-     panel_metadata=uipanel(tdt_figure,'Title','Buffer metadata',...
-          'Units','Normalized',...
-          'Position',[ pos(1)+pos(3)+left_margin pos(2) (1-left_margin*2-(pos(1)+pos(3))) pos(4) ],...
-          'BackgroundColor',panel_background,...
-          'ForegroundColor',font_color,...
-          'FontSize',fontsize);
-   
-    nfields=length(metadata_fields);
-    row_height=(1-panel_vert_margin*2)/(nfields*2);
-    text_width=(1-panel_hor_margin*2);
-    edit_width=(1-panel_hor_margin*2);
-    row_idx=0;
+	pos=get(panel_tag,'position');
 
-    % write these out to a metadata property and I think we're done you
-    % lovely man
-    
-    for j=1:nfields
+	panel_metadata=uipanel(tdt_figure,'Title','Buffer metadata',...
+		'Units','Normalized',...
+		'Position',[ pos(1)+pos(3)+hor_margin pos(2) (1-hor_margin*2-(pos(1)+pos(3))) pos(4) ],...
+		'BackgroundColor',panel_background,...
+		'ForegroundColor',font_color,...
+		'FontSize',fontsize);
 
-        % start at top
-        % callback is to reset the tag if we edit the text
-        
-        row_idx=row_idx+1;
-        cur_row=rem(row_idx-1,6)+1;
-        
-        metadata_id=sprintf('%s_text',metadata_fields{j});
-        metadata_text=sprintf('%s: ',regexprep(metadata_fields{j},'_',' '));
-        metadata_text(1)=upper(metadata_text(1));
-      
-        [panel_hor_margin (1-panel_vert_margin)-row_height*cur_row text_width row_height/2]
-        
-        metadata_axis.(metadata_id)=uicontrol(panel_metadata,'Style','text',...
-            'String',metadata_text,...
-            'FontSize',fontsize,...
-            'Unit','Normalized',...
-            'Position',[panel_hor_margin (1-panel_vert_margin)-row_height*cur_row text_width row_height/2],...
-            'BackgroundColor',panel_background,....
-            'ForegroundColor',font_color);
+	nfields=length(metadata_fields);
+	row_height=(1-panel_vert_margin*2)/(nfields*2);
+	text_width=(1-panel_hor_margin*2);
+	edit_width=(1-panel_hor_margin*2);
+	row_idx=0;
 
-        row_idx=row_idx+1;        
-        cur_row=rem(row_idx-1,6)+1;
-        
-        metadata_axis.(metadata_fields{j})=uicontrol(panel_metadata,'Style','edit',...
-            'String','',...
-            'Units','Normalized',...
-            'FontSize',fontsize,...
-            'Max',2,...
-            'Position',[panel_hor_margin (1-panel_vert_margin)-row_height*cur_row edit_width row_height]);
+	% write these out to a metadata property and I think we're done you
+	% lovely man
+
+	for j=1:nfields
+
+		% start at top
+		% callback is to reset the tag if we edit the text
+
+		row_idx=row_idx+1;
+		cur_row=rem(row_idx-1,6)+1;
+
+		metadata_id=sprintf('%s_text',metadata_fields{j});
+		metadata_text=sprintf('%s: ',regexprep(metadata_fields{j},'_',' '));
+		metadata_text(1)=upper(metadata_text(1));
+
+		[panel_hor_margin (1-panel_vert_margin)-row_height*cur_row text_width row_height/2]
+
+		metadata_axis.(metadata_id)=uicontrol(panel_metadata,'Style','text',...
+			'String',metadata_text,...
+			'FontSize',fontsize,...
+			'Unit','Normalized',...
+			'Position',[panel_hor_margin (1-panel_vert_margin)-row_height*cur_row text_width row_height/2],...
+			'BackgroundColor',panel_background,....
+			'ForegroundColor',font_color);
+
+		row_idx=row_idx+1;
+		cur_row=rem(row_idx-1,6)+1;
+
+		metadata_axis.(metadata_fields{j})=uicontrol(panel_metadata,'Style','edit',...
+			'String','',...
+			'Units','Normalized',...
+			'FontSize',fontsize,...
+			'Max',2,...
+			'Position',[panel_hor_margin (1-panel_vert_margin)-row_height*cur_row edit_width row_height],...
+			'Callback',{@update_metadata_gui,OBJ,metadata_fields{j}});
 
 
-    end
-    
+	end
+
 	OBJ.gui_handles.button=button_axis;
 	OBJ.gui_handles.status=status_axis;
 
@@ -277,8 +277,8 @@ if OBJ.status.buffer_exists
 		'Position',[panel_hor_margin (1-panel_vert_margin-file_height/1.5-button_height) .2 button_height/2 ],...
 		'Callback',{@recording_loop_gui,OBJ},...
 		'UserData',true);
-    
- 
+
+
 end
 
 OBJ.gui_handles.status=status_axis;

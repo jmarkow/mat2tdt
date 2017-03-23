@@ -11,7 +11,11 @@ OBJ.update_status;
 [filename,pathname,ext]=fileparts(OBJ.buffer_store);
 
 fprintf('Saving metadata...');
-savejson('',OBJ.tags,fullfile(filename,[ pathname '.json']));
+save_metadata.tags=OBJ.tags;
+save_metadata.metadata=OBJ.metadata;
+save_metadata.status=OBJ.status;
+save_metadata.settings=OBJ.settings;
+savejson('',save_metadata,fullfile(filename,[ pathname '.json']));
 fprintf('success\n');
 
 [fid,status]=fopen(OBJ.buffer_store,'Wb');
