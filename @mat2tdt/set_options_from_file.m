@@ -18,7 +18,7 @@ if isfield(struct,'settings')
 				OBJ.settings.(options{i})=struct.settings.(options{i});
 			else
 				fprintf('Skipping %s, used class %s but correct class is %s\n',...
-					(options{i}),use_class,classname(struct.settings.(options{i})));
+					(options{i}),use_class,class(struct.settings.(options{i})));
 			end
 		else
 			fprintf('Did not find setting %s\n',options{i});
