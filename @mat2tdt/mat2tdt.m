@@ -40,6 +40,7 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 
 			obj.settings.zbus_rack_num=[];
 			obj.settings.zbus_address=[];
+			obj.settings.start_gui=false;
 
 			obj.activex.zbus=[];
 			obj.activex.dev=[];
@@ -59,6 +60,10 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			end
 
 			obj.set_buffer_store;
+
+			if obj.setting.start_gui
+				obj.gui_standard;
+			end
 
 		end
 
