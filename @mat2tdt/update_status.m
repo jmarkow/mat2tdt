@@ -47,7 +47,7 @@ if isfield(OBJ.gui_handles,'status')
 				set(OBJ.gui_handles.status.(chk_status{i}),'string','Yes','ForegroundColor','g');
 			else
 				set(OBJ.gui_handles.status.(chk_status{i}),'string','No','ForegroundColor','r');
-			end
+            end            
 		end
 
 	end
