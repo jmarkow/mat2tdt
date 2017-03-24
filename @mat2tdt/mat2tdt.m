@@ -43,11 +43,13 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			obj.settings.zbus_address=[];
 			obj.settings.start_gui=false;
 
-            obj.metadata.session_name='';
-            obj.metadata.subject_name='';
-            obj.metadata.notes='';
+      obj.metadata.session_name='';
+      obj.metadata.subject_name='';
+      obj.metadata.notes='';
+			obj.metadata.data_format='ieee-be';
+			obj.metadata.data_precision='float32';
 
-            obj.activex.zbus=[];
+      obj.activex.zbus=[];
 			obj.activex.dev=[];
 
 			obj.use_defaults;
@@ -65,7 +67,7 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			end
 
 			obj.set_buffer_store;
-            
+
 
 			if obj.settings.start_gui
 				obj.gui_standard;

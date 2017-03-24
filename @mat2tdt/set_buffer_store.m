@@ -10,7 +10,7 @@ if isempty(STORE)
 
 	% automagically set this, matching timestamps w/ K2 acquisition software
 
-	filename=sprintf('tdt_data_%s.bin',datestr(datetime('now'),'yyyymmddHHMMSS'));
+	filename=sprintf('tdt_data_%s.dat',datestr(datetime('now'),'yyyymmddHHMMSS'));
 	filepath=OBJ.settings.save_dir;
 
 	use_file=fullfile(filepath,filename);
