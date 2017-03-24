@@ -70,6 +70,9 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 
 
 			if obj.settings.start_gui
+				if ~obj.status.circuit_loaded
+					obj.load_circuit;
+				end
 				obj.gui_standard;
 			end
 
