@@ -49,11 +49,11 @@ end
 
 % if we have enough headroom, grab some extra samples...
 
-if cur_idx<(OBJ.tags.BufferSize-OBJ.settings.buffer_overhang-100)
+if cur_idx<transfer_pts
 
-	last_idx=cur_idx;
+	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
-	while cur_idx<(last_idx+OBJ.settings.buffer_overhang)
+	while cur_idx<OBJ.settings.buffer_overhang
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
