@@ -26,10 +26,10 @@ for i=1:length(HANDLES)
 	end
 end
 
-status=OBJ.activex.dev.SoftTrg(2);
-
-if status==1
-	fprintf('Buffer stopped successfully\n');
-else
-	fprintf('Buffer did NOT stop correctly\n');
-end
+%status=OBJ.activex.dev.SoftTrg(2);
+% 
+% if status==1
+% 	fprintf('Buffer stopped successfully\n');
+% else
+% 	fprintf('Buffer did NOT stop correctly\n');
+% end
