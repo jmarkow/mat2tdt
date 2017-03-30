@@ -49,11 +49,11 @@ end
 
 % if we have enough headroom, grab some extra samples...
 
-if cur_idx<(BufferSize-OBJ.settings.buffer_overhang-100)
+if cur_idx<(OBJ.tags.BufferSize-OBJ.settings.buffer_overhang-100)
 
 	last_idx=cur_idx;
 
-	while cur_idx<(last_idx+OBJ.settings.buffer_hang)
+	while cur_idx<(last_idx+OBJ.settings.buffer_overhang)
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
