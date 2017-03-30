@@ -5,7 +5,7 @@ function recording_loop(OBJ,FID,HANDLE)
 
 transfer_pts=OBJ.tags.BufferSize/2;
 
-while (ishandle(HANDLE)) & OBJ.status.recording_enabled
+while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% ensure the gui updates foolio
 
@@ -43,6 +43,20 @@ while (ishandle(HANDLE)) & OBJ.status.recording_enabled
 
 	if cur_idx>transfer_pts
 		fprintf('Current transfer rate too slow to keep up...\n');
-	end
+    end
 
 end
+
+
+% wait until the buffer is full to break out of the full loop
+last_idx=cur_idx;
+
+while cur_idx<last_idx+300
+    cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+    read_data=OBJ.activex.dev.ReadTagV('BufferData',last_idx,last_idx+300);
+    fwrite(FID,read_data,'float32','ieee-be');
+end
+
+
+    
+    

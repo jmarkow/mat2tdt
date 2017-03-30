@@ -29,7 +29,7 @@ end
 
 finish_up=onCleanup(@() gui_cleanup(OBJ,fid,[]));
 
-status=OBJ.activex.dev.SoftTrg(2);
+%status=OBJ.activex.dev.SoftTrg(2);
 status=OBJ.activex.dev.SoftTrg(1);
 
 if status==1
