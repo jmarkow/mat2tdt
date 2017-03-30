@@ -3,5 +3,7 @@ function stop_recording(SRC,EVENT,OBJ)
 %
 %
 
+% shut everything off and bail bro
+
 status=OBJ.activex.dev.SoftTrg(3);
 OBJ.status.recording_enabled=false;

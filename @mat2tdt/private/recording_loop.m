@@ -43,20 +43,23 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	if cur_idx>transfer_pts
 		fprintf('Current transfer rate too slow to keep up...\n');
-    end
+	end
 
 end
 
+% if we have enough headroom, grab some extra samples...
 
-% wait until the buffer is full to break out of the full loop
-last_idx=cur_idx;
+if cur_idx<(BufferSize-OBJ.settings.buffer_overhang-100)
 
-while cur_idx<last_idx+300
-    cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-    read_data=OBJ.activex.dev.ReadTagV('BufferData',last_idx,last_idx+300);
-    fwrite(FID,read_data,'float32','ieee-be');
+	last_idx=cur_idx;
+
+	while cur_idx<(last_idx+OBJ.settings.buffer_hang)
+		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+	end
+
+	% hurry up offense
+
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',last_idx,last_idx+OBJ.settings.buffer_overhang);
+	fwrite(FID,read_data,'float32','ieee-be');
+
 end
-
-
-    
-    
