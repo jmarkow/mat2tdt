@@ -59,7 +59,7 @@ if cur_idx<(OBJ.tags.BufferSize-OBJ.settings.buffer_overhang-100)
 
 	% hurry up offense
 
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',last_idx,last_idx+OBJ.settings.buffer_overhang);
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,OBJ.settings.buffer_overhang);
 	fwrite(FID,read_data,'float32','ieee-be');
 
 end
