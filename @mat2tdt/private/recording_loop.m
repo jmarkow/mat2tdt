@@ -61,7 +61,7 @@ if cur_idx<transfer_pts & OBJ.settings.buffer_overhang
 
 	% hurry up offense
 
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,tranfer_pts);
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts);
 	fwrite(FID,read_data,'float32','ieee-be');
 
 end
