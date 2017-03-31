@@ -23,7 +23,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% write out the first half of the buffer
 
-	fwrite(FID,swapbytes(read_data),'float32');
+	%fwrite(FID,swapbytes(read_data),'float32');
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
@@ -34,6 +34,8 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	while cur_idx>transfer_pts
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
+
+	% append and do one write instead
 
 	read_data=[read_data OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts)];
 
