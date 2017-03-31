@@ -41,7 +41,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% write the second chunk
 
-	fwrite(FID,swapbytes(read_data),'float32');
+	fwrite(FID,read_data,'float32','ieee-be');
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx>transfer_pts
