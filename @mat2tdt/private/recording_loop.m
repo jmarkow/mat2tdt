@@ -23,9 +23,10 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% write out the first half of the buffer
 
-	fwrite(FID,read_data,'float32','ieee-be');
+	fwrite(FID,swapbytes(read_data),'float32');
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+
 	if cur_idx<transfer_pts
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
@@ -34,11 +35,11 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts);
+	read_data=[read_data OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts)];
 
 	% write the second chunk
 
-	fwrite(FID,read_data,'float32','ieee-be');
+	fwrite(FID,swapbytes(read_data),'float32');
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx>transfer_pts
@@ -49,7 +50,7 @@ end
 
 % if we have enough headroom, grab some extra samples...
 
-if cur_idx<transfer_pts
+if cur_idx<transfer_pts & OBJ.setting.buffer_overhang<(OBJ.tags.BufferSize-300)
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 

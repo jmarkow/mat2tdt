@@ -18,7 +18,7 @@ save_metadata.settings=OBJ.settings;
 savejson('',save_metadata,fullfile(filename,[ pathname '.json']));
 fprintf('success\n');
 
-[fid,status]=fopen(OBJ.buffer_store,'Wb');
+[fid,status]=fopen(OBJ.buffer_store,'w+');
 
 if isempty(status)
 	fprintf('Will save data to %s\n',OBJ.buffer_store);
