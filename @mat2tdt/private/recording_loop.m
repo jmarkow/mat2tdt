@@ -23,8 +23,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% write out the first half of the buffer
 
-	%fwrite(FID,swapbytes(read_data),'float32');
-
+	fwrite(FID,read_data,'float32','ieee-be');
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx<transfer_pts
@@ -37,7 +36,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% append and do one write instead
 
-	read_data=[read_data OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts)];
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',transfer_pts,transfer_pts);
 
 	% write the second chunk
 
@@ -50,19 +49,19 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 end
 
-% if we have enough headroom, grab some extra samples...
+% if we have enough headroom, grab another 1/2 buffer after shutting off sync...
 
-if cur_idx<transfer_pts & OBJ.settings.buffer_overhang<(OBJ.tags.BufferSize-300)
+if cur_idx<transfer_pts & OBJ.settings.buffer_overhang
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
-	while cur_idx<OBJ.settings.buffer_overhang
+	while cur_idx<transfer_pts
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
 	% hurry up offense
 
-	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,OBJ.settings.buffer_overhang);
+	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,tranfer_pts);
 	fwrite(FID,read_data,'float32','ieee-be');
 
 end
