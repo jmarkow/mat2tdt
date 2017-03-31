@@ -52,7 +52,7 @@ end
 
 % if we have enough headroom, grab some extra samples...
 
-if cur_idx<transfer_pts & OBJ.setting.buffer_overhang<(OBJ.tags.BufferSize-300)
+if cur_idx<transfer_pts & OBJ.settings.buffer_overhang<(OBJ.tags.BufferSize-300)
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
