@@ -11,8 +11,10 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% I wonder if this is what's causing our problems...
 	% replace w/ a short pause or java.lang.Thread.sleep
-	
-	drawnow();
+
+	%drawnow();
+
+
 
 	% wait until the first half of the buffer fills
 
@@ -49,6 +51,8 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	if cur_idx>transfer_pts
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
+
+	pause(1e-3);
 
 end
 
