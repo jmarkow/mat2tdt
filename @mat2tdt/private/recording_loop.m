@@ -9,6 +9,9 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	% ensure the gui updates foolio
 
+	% I wonder if this is what's causing our problems...
+	% replace w/ a short pause or java.lang.Thread.sleep
+	
 	drawnow();
 
 	% wait until the first half of the buffer fills
