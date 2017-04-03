@@ -14,8 +14,6 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	%drawnow();
 
-
-
 	% wait until the first half of the buffer fills
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
