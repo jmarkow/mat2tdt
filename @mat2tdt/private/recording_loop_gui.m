@@ -38,6 +38,7 @@ else
 	error('Could not start buffer');
 end
 
+pause(1e-4);
 recording_loop(OBJ,fid,SRC);
 
 status=OBJ.activex.dev.SoftTrg(2);
@@ -49,5 +50,5 @@ if status==1
 	fprintf('Buffer stopped...\n')
 end
 
-set(OBJ.gui_handles.button.stop_button,'enable','off');
+set(OBJ.gui_handles.button.stop_buffer,'enable','off');
 OBJ.update_status;

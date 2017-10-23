@@ -19,6 +19,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	while cur_idx<transfer_pts
+    pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
@@ -34,6 +35,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	end
 
 	while cur_idx>transfer_pts
+    pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 	end
 
@@ -50,7 +52,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
 
-	pause(1e-3);
+	pause(1e-4);
 
 end
 
