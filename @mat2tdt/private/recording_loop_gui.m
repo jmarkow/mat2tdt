@@ -3,7 +3,7 @@ function recording_loop_gui(SRC,EVENT,OBJ)
 %
 
 OBJ.status.recording_enabled=true;
-set(OBJ.gui_handles.button.stop_button,'enable','on');
+set(OBJ.gui_handles.button.stop_buffer,'enable','on');
 OBJ.update_status;
 
 % save everything to json foolio

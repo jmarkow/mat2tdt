@@ -8,4 +8,4 @@ function stop_recording(SRC,EVENT,OBJ)
 status=OBJ.activex.dev.SoftTrg(3);
 OBJ.status.recording_enabled=false;
 fprintf('Sent stop signal...\n');
-OBJ.update_status;
+%OBJ.update_status;
