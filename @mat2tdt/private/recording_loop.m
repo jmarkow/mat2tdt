@@ -38,6 +38,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx<transfer_pts
+    OBJ.set_buffer_status('u');
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
 
@@ -47,6 +48,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	while cur_idx>transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+    count=count+1;
     if count>OBJ.settings.buffer_warning & ~warning_issued
       OBJ.set_buffer_status('u');
       fprintf('Buffer index is not incrementing, restart...\n');
@@ -64,6 +66,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
 	if cur_idx>transfer_pts
+    OBJ.set_buffer_status('u');
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
 
