@@ -23,7 +23,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
     count=count+1;
-    if count>OBJ.options.buffer_warning & ~warning_issued
+    if count>OBJ.settings.buffer_warning & ~warning_issued
       OBJ.set_buffer_status('u');
       fprintf('Buffer index is not incrementing, restart...\n');
       warning_issued=true;
@@ -47,7 +47,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	while cur_idx>transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-    if count>OBJ.options.buffer_warning & ~warning_issued
+    if count>OBJ.settings.buffer_warning & ~warning_issued
       OBJ.set_buffer_status('u');
       fprintf('Buffer index is not incrementing, restart...\n');
       warning_issued=true;
