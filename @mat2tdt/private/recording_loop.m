@@ -15,6 +15,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	% wait until the first half of the buffer fills
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+  last_idx=cur_idx;
 
   count=0;
   warning_issued=false;
@@ -22,7 +23,12 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	while cur_idx<transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-    count=count+1;
+    if cur_idx==last_idx
+      count=count+1;
+    else
+      count=0;
+    end
+    last_idx=cur_idx;
     if count>OBJ.settings.buffer_warning & ~warning_issued
       OBJ.set_buffer_status('u');
       fprintf('Buffer index is not incrementing, restart...\n');
@@ -36,6 +42,7 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	fwrite(FID,read_data,'float32','ieee-be');
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+  last_idx=cur_idx;
 
 	if cur_idx<transfer_pts
     OBJ.set_buffer_status('u');
@@ -48,7 +55,12 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 	while cur_idx>transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
-    count=count+1;
+    if cur_idx==last_idx
+      count=count+1;
+    else
+      count=0;
+    end
+    last_idx=cur_idx;
     if count>OBJ.settings.buffer_warning & ~warning_issued
       OBJ.set_buffer_status('u');
       fprintf('Buffer index is not incrementing, restart...\n');
