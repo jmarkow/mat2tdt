@@ -38,6 +38,7 @@ else
 	error('Could not start buffer');
 end
 
+OBJ.set_buffer_status('h');
 pause(1e-4);
 recording_loop(OBJ,fid,SRC);
 
@@ -50,5 +51,6 @@ if status==1
 	fprintf('Buffer stopped...\n')
 end
 
+OBJ.set_buffer_status;
 set(OBJ.gui_handles.button.stop_buffer,'enable','off');
 OBJ.update_status;

@@ -7,8 +7,6 @@ transfer_pts=OBJ.tags.BufferSize/2;
 
 while ishandle(HANDLE) & OBJ.status.recording_enabled
 
-	% ensure the gui updates foolio
-
 	% I wonder if this is what's causing our problems...
 	% replace w/ a short pause or java.lang.Thread.sleep
 
@@ -18,9 +16,18 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 
 	cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
 
+  count=0;
+  warning_issued=false;
+
 	while cur_idx<transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+    count=count+1;
+    if count>OBJ.options.buffer_warning & ~warning_issued
+      OBJ.set_buffer_status('u');
+      fprintf('Buffer index is not incrementing, restart...\n');
+      warning_issued=true;
+    end
 	end
 
 	read_data=OBJ.activex.dev.ReadTagV('BufferData',0,transfer_pts);
@@ -34,9 +41,17 @@ while ishandle(HANDLE) & OBJ.status.recording_enabled
 		fprintf('Current transfer rate too slow to keep up...\n');
 	end
 
+  count=0;
+  warning_issued=false;
+
 	while cur_idx>transfer_pts
     pause(1e-4);
 		cur_idx=OBJ.activex.dev.GetTagVal('BufferIndex');
+    if count>OBJ.options.buffer_warning & ~warning_issued
+      OBJ.set_buffer_status('u');
+      fprintf('Buffer index is not incrementing, restart...\n');
+      warning_issued=true;
+    end
 	end
 
 	% append and do one write instead

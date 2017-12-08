@@ -14,7 +14,8 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 		settings
 		status
 		buffer_store
-        metadata
+    buffer_status
+    metadata
 
 	end
 
@@ -67,7 +68,7 @@ classdef mat2tdt < handle & matlab.mixin.SetGet
 			end
 
 			obj.set_buffer_store;
-
+      obj.set_buffer_status;
 
 			if obj.settings.start_gui
 				if ~obj.status.circuit_loaded
