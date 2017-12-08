@@ -18,5 +18,5 @@ otherwise
   msg='null';
 end
 
-set(OBJ.gui_handles.button_axis.buffer_status,...
+set(OBJ.gui_handles.button.buffer_status,...
   'ForegroundColor',set_color,'text',msg);
