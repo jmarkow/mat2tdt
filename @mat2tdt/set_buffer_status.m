@@ -18,5 +18,7 @@ otherwise
   msg='null';
 end
 
-set(OBJ.gui_handles.button.buffer_status,...
-  'ForegroundColor',set_color,'String',sprintf('Buffer status: %s',upper(msg)));
+if isfield(OBJ.gui_handles,'button') & isfield(OBJ.gui_handles.button,'buffer_status')
+  set(OBJ.gui_handles.button.buffer_status,...
+    'ForegroundColor',set_color,'String',sprintf('Buffer status: %s',upper(msg)));
+end
