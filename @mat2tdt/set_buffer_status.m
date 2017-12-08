@@ -19,4 +19,4 @@ otherwise
 end
 
 set(OBJ.gui_handles.button.buffer_status,...
-  'ForegroundColor',set_color,'text',msg);
+  'ForegroundColor',set_color,'String',sprintf('Buffer status: %s',upper(msg)));
