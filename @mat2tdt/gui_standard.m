@@ -289,6 +289,7 @@ end
 
 OBJ.gui_handles.status=status_axis;
 OBJ.gui_handles.button=button_axis;
+OBJ.set_buffer_status;
 OBJ.update_status;
 
 % refresh FILE, and record MOFO
