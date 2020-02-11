@@ -16,3 +16,7 @@ for i=1:num
 		OBJ.tags.(tag_name)=OBJ.activex.dev.GetTagVal(tag_name);
 	end
 end
+
+if length(OBJ.tags) > 0
+    OBJ.tags = orderfields(OBJ.tags);
+end

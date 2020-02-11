@@ -6,8 +6,8 @@ function update_metadata_gui(SRC,EVENT,OBJ,FIELD)
 
 fprintf('Updating metadata field %s...',FIELD);
 if isfield(OBJ.metadata,FIELD)
-	OBJ.metadata.(FIELD)=get(SRC,'String');
-	fprintf('success\n');
+    OBJ.metadata.(FIELD)=get(SRC,'String');
+    fprintf('success\n');
 else
-	fprintf('could not find field\n');
+    fprintf('could not find field\n');
 end
